@@ -1,5 +1,5 @@
 #!/bin/bash
-bundle exec thin                                \
+thin                                            \
   --tag           matthan                       \
   --rackup        config.ru                     \
   --environment   production                    \
