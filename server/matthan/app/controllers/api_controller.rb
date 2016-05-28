@@ -1,4 +1,4 @@
-class ApiController < ActionController::Baseß
+class ApiController < ActionController::Base
 
   def report
     # validate
