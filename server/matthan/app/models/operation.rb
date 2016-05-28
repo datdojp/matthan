@@ -1,6 +1,6 @@
 class Operation
-  include Mongoid:Document
-  include Mongoid:Timestamps
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
   ENGINE_STATUS_OFF = 1
   ENGINE_STATUS_OFF = 0

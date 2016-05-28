@@ -1,0 +1,26 @@
+<%= form_for @car do |f| %>
+  <div class="form-group">
+    <label>Tên</label>
+    <%= f.text_field :name, required: :required, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label>Biển số</label>
+    <%= f.text_field :license_plate, required: :required, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <label>Loại xe</label>
+    <%= f.select(
+          :type,
+          options_for_select(CAR_TYPES.map { |t| [t, t] }, @car.type),
+          {},
+          {
+            class: 'form-control',
+            style: 'width: 200px;'
+          }) %>
+  </div>
+  <div class="form-group">
+    <label>Sim quản lý</label>
+    <%= f.text_field :sim_number, required: :required, class: 'form-control' %>
+  </div>
+  <%= f.submit 'Sửa', class: 'btn btn-success' %>
+<% end %>

@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Matthan</title>
+  <title><%= @title || 'Mat than' %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
-<%= yield %>
+<div style="width:1024px; margin: 0 auto; padding-top:10px; padding-bottom: 10px;">
+
+  <!-- Navigation bar -->
+  <% if controller.authenticated? %>
+    <div>
+      <ul class="nav nav-pills" style='float:left;'>
+        <li role="presentation" <%= controller.controller_name == 'operations' ? raw("class='active'") : nil %> >
+          <%= link_to 'Tìm kiếm', operations_path %>
+        </li>
+        <li role="presentation" <%= controller.controller_name == 'owners' ? raw("class='active'") : nil %> >
+          <%= link_to 'Chủ xe', owners_path %>
+        </li>
+        <li role="presentation" <%= controller.controller_name == 'cars' ? raw("class='active'") : nil %> >
+          <%= link_to 'Xe', cars_path %>
+        </li>
+        <li role="presentation" <%= controller.controller_name == 'drivers' ? raw("class='active'") : nil %> >
+          <%= link_to 'Tài xế', drivers_path %>
+        </li>
+      </ul>
+      <%= link_to 'Đăng xuất', logout_path, class: 'btn btn-danger', style: 'float:right;' %>
+    </div>
+    <br/><br/>
+  <% end %>
+
+  <!-- Error box -->
+  <% if flash[:info] %>
+    <div class="alert alert-info"><%= raw flash[:info] %></div>
+    <% flash[:info] = nil %>
+  <% end %>
+  <% if flash[:error] %>
+    <div class="alert alert-danger"><%= raw flash[:error] %></div>
+    <% flash[:error] = nil %>
+  <% end %>
+
+  <!-- Page title -->
+  <h3><%= @title %></h3>
+  <hr/>
+
+  <%= yield %>
+</div>
 
 </body>
 </html>

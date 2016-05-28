@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  scope 'api' do
+    post 'report' => 'api#report'
+  end
+
+  scope 'auth' do
+    get 'login' => 'auth#login'
+    post 'login' => 'auth#submit'
+    get 'logout' => 'auth#logout'
+  end
+
+  resources :owners, :cars, :drivers, :operations
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

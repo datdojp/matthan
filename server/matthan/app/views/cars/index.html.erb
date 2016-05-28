@@ -1,0 +1,36 @@
+<%= link_to 'Tạo mới', new_car_path, class: 'btn btn-success' %>
+
+<br/>
+<br/>
+
+<table class='table'>
+  <tr>
+    <th>Tên</th>
+    <th>Biển số</th>
+    <th>Loại xe</th>
+    <th>Sim quản lý</th>
+    <th>Tài xế</th>
+    <th></th>
+  </tr>
+  <% @cars.each do |c| %>
+    <tr>
+      <td><%= raw c.name %></td>
+      <td><%= raw c.license_plate %></td>
+      <td><%= raw c.type %></td>
+      <td><%= raw c.sim_number %></td>
+      <td><%= c.driver ? raw(c.driver.name) : nil %></td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Lựa chọn
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><%= link_to 'Sửa', edit_car_path(c.id) %></li>
+            <li><%= link_to 'Xoá', car_path(c.id), method: 'delete', data: { confirm: 'Bạn có chắc muốn xoá?' } %></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>
