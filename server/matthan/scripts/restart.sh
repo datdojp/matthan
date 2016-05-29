@@ -11,4 +11,4 @@ thin                                            \
   --threaded                                    \
   start
 
-sudo service nginx restart
+service nginx restart
