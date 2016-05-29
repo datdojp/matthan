@@ -36,3 +36,9 @@ bower.json
 
 # byebug
 .byebug_history
+
+# secrets
+server/matthan/config/secrets.yml
+
+# rake
+server/matthan/lib/tasks/rake_tasks.log
