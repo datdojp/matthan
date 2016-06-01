@@ -2,6 +2,7 @@ ERR_INVALID_PARAM = 100
 ERR_OBJECT_NOT_FOUND = 101
 
 FIXED_TIMEZONE = '+0700' # Vietnam
+FIXED_TIMEZONE_OFFSET = 7 * 60
 
 unless Owner.where(role: Owner::ROLE_MASTER_OWNER).exists?
   require 'digest/md5'

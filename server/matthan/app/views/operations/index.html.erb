@@ -1,0 +1,63 @@
+<%= form_tag operations_path, method: :get, class: 'well' do %>
+  <div class="form-group">
+    <label>Chọn số xe</label>
+    <%
+      car_options = @cars.map do |c|
+        ["#{c.name} (#{c.license_plate})", c.license_plate]
+      end
+    %>
+    <%= select_tag :license_plate,
+                   options_for_select(car_options, @license_plate),
+                   class: 'form-control',
+                   style: 'width: 400px;' %>
+  </div>
+  <div>
+    <div class="form-group" style="float:left;">
+      <label>Thời gian bắt đầu</label>
+      <%= render partial: "operations/datetime_picker", locals: { name: :from, val: @from } %>
+    </div>
+    <div class="form-group" style="float:left; margin-left: 10px;">
+      <label>Thời gian kết thúc</label>
+      <%= render partial: "operations/datetime_picker", locals: { name: :to, val: @to } %>
+    </div>
+  </div>
+  <br style="clear:both;"/>
+  <%= submit_tag 'Tìm kiếm', class: 'btn btn-success' %>
+<% end %>
+
+<table class='table'>
+  <tr>
+    <th>Thời gian A</th>
+    <th>Thời gian B</th>
+    <th>Thời gian</th>
+    <th>Vị trí A</th>
+    <th>Vị trí B</th>
+  </tr>
+  <% @op_clusters.each do |oc| %>
+    <tr>
+      <td><%= render partial: "operations/datetime", locals: { val: oc.time_from.to_i } %></td>
+      <td>
+        <% if oc.time_to != oc.time_from %>
+          <%= render partial: "operations/datetime", locals: { val: oc.time_to.to_i } %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td>
+        <% if oc.time_to != oc.time_from %>
+          <%= raw oc.duration_text %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+      <td><%= raw oc.seat_pos_from_text %></td>
+      <td>
+        <% if oc.seat_pos_to != oc.seat_pos_from %>
+          <%= raw oc.seat_pos_to_text %>
+        <% else %>
+          -
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

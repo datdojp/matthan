@@ -26,7 +26,7 @@ class AuthController < ApplicationController
   end
 
   def logout
-    session[:owner] = nil
+    session.delete(:owner)
     redirect_to login_path
   end
 
