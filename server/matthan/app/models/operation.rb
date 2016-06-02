@@ -2,7 +2,7 @@ class Operation
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  ENGINE_STATUS_OFF = 1
+  ENGINE_STATUS_ON = 1
   ENGINE_STATUS_OFF = 0
 
   field :seat_positions, type: String

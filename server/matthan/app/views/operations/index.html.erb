@@ -22,6 +22,18 @@
     </div>
   </div>
   <br style="clear:both;"/>
+  <div class="form-group">
+    <label>Trạng thái</label>
+    <%= select_tag :status,
+                   options_for_select([
+                      [ '-', OperationsController::STATUS_UNSPECIFIED ],
+                      [ 'Xe có khách', OperationsController::STATUS_HAS_PASSENGER ],
+                      [ 'Xe chỉ có tài xế', OperationsController::STATUS_ONLY_DRIVER ],
+                      [ 'Xe mở máy', OperationsController::STATUS_ENGINE_ON ]
+                   ], @status),
+                   class: 'form-control',
+                   style: 'width: 200px;' %>
+  </div>
   <%= submit_tag 'Tìm kiếm', class: 'btn btn-success' %>
 <% end %>
 
@@ -32,6 +44,7 @@
     <th>Thời gian</th>
     <th>Vị trí A</th>
     <th>Vị trí B</th>
+    <th>Động cơ</th>
   </tr>
   <% @op_clusters.each do |oc| %>
     <tr>
@@ -58,6 +71,7 @@
           -
         <% end %>
       </td>
+      <td><%= raw oc.engine_status_text %></td>
     </tr>
   <% end %>
 </table>

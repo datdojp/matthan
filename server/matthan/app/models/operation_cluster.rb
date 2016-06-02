@@ -1,6 +1,12 @@
 class OperationCluster
 
-  attr_accessor :time_from, :time_to, :seat_pos_from, :seat_pos_to
+  attr_accessor :time_from,
+                :time_to,
+                :seat_pos_from,
+                :seat_pos_to,
+                :has_passenger,
+                :only_driver,
+                :engine_status
 
   def self.from_operations(operations)
     oc = OperationCluster.new
@@ -14,6 +20,9 @@ class OperationCluster
         oc.seat_pos_to = o.seat_positions
       end
     end
+    oc.has_passenger  = operations.first.seat_positions =~ /^..*1.*$/
+    oc.only_driver    = operations.first.seat_positions =~ /^10+$/
+    oc.engine_status  = operations.first.engine_status
     return oc
   end
 
@@ -32,6 +41,10 @@ class OperationCluster
 
   def seat_pos_to_text
     return seat_pos_text(seat_pos_to)
+  end
+
+  def engine_status_text
+    engine_status == Operation::ENGINE_STATUS_ON ? "Mở" : "Tắt"
   end
 
   private
