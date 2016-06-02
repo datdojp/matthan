@@ -42,3 +42,6 @@ server/matthan/config/secrets.yml
 
 # rake
 server/matthan/lib/tasks/rake_tasks.log
+
+# precompiled assets
+server/matthan/public/assets
