@@ -68,6 +68,10 @@ class OperationsController < AuthenticatedController
         true
       end
     end
+
+    # calculate sum time
+    @sum_duration = 0
+    @op_clusters.each { |oc| @sum_duration += oc.duration }
   end
 
   private

@@ -26,13 +26,16 @@ class OperationCluster
     return oc
   end
 
+  def duration
+    if time_from && time_to
+      return time_to - time_from
+    else
+      return 0
+    end
+  end
+
   def duration_text
-    seconds = time_to - time_from
-    hours = seconds / (60 * 60)
-    seconds = seconds % (60 * 60)
-    minutes = seconds / 60
-    seconds = seconds % 60
-    return "#{left_pad(hours)}:#{left_pad(minutes)}:#{left_pad(seconds)}"
+    AppUtil.duration_text(duration)
   end
 
   def seat_pos_from_text
@@ -48,18 +51,6 @@ class OperationCluster
   end
 
   private
-
-  def left_pad(n)
-    sprintf('%02d', n)
-  end
-
-  def time_text(time)
-    if time
-      return Time.strftime()
-    else
-      return nil
-    end
-  end
 
   def seat_pos_text(seat_pos)
     if seat_pos
